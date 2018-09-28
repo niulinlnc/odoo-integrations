@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    Odoo, Open Source Management Solution
 #    Copyright (C) 2004-2010, 2014 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 
 import logging
 
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 _logger = logging.getLogger(__name__)

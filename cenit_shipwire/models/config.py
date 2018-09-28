@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    Odoo, Open Source Management Solution
 #    Copyright (C) 2004-2010, 2014 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -46,13 +46,13 @@ class CenitIntegrationSettings(models.TransientModel):
     ############################################################################
     # Default Getters
     ############################################################################
-    def get_default_user(self, context):
+    def get_values_user(self):
         user = self.env['ir.config_parameter'].get_param(
             'odoo_cenit.shipwire.user', default=None
         )
         return {'user': user or ''}
 
-    def get_default_passwd(self, context):
+    def get_values_passwd(self):
         passwd = self.env['ir.config_parameter'].get_param(
             'odoo_cenit.shipwire.passwd', default=None
         )
@@ -62,15 +62,12 @@ class CenitIntegrationSettings(models.TransientModel):
     ############################################################################
     # Default Setters
     ############################################################################
-    def set_user(self):
+    def set_values(self):
         config_parameters = self.env['ir.config_parameter']
         for record in self.browse(self.ids):
             config_parameters.set_param (
                 'odoo_cenit.shipwire.user', record.user or ''
             )
-
-    def set_passwd(self):
-        config_parameters = self.env['ir.config_parameter']
         for record in self.browse(self.ids):
             config_parameters.set_param (
                 'odoo_cenit.shipwire.passwd', record.passwd or ''

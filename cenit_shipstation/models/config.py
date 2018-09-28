@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    Odoo, Open Source Management Solution
 #    Copyright (C) 2004-2010, 2014 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 
 import logging
 
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 _logger = logging.getLogger(__name__)
@@ -48,19 +48,19 @@ class CenitIntegrationSettings(models.TransientModel):
     ############################################################################
     # Default Getters
     ############################################################################
-    def get_default_key(self, context):
+    def get_values_key(self):
         key = self.env['ir.config_parameter'].get_param(
             'odoo_cenit.shipstation.key', default=None
         )
         return {'key': key or ''}
 
-    def get_default_secret(self, context):
+    def get_values_secret(self):
         secret = self.env['ir.config_parameter'].get_param(
             'odoo_cenit.shipstation.secret', default=None
         )
         return {'secret': secret or ''}
 
-    def get_default_store_id(self, context):
+    def get_values_store_id(self):
         store_id = self.env['ir.config_parameter'].get_param(
             'odoo_cenit.shipstation.store_id', default=None
         )
@@ -70,22 +70,18 @@ class CenitIntegrationSettings(models.TransientModel):
     ############################################################################
     # Default Setters
     ############################################################################
-    def set_key(self):
+    def set_values(self):
         config_parameters = self.env['ir.config_parameter']
         for record in self.browse(self.ids):
             config_parameters.set_param (
                 'odoo_cenit.shipstation.key', record.key or ''
             )
 
-    def set_secret(self):
-        config_parameters = self.env['ir.config_parameter']
         for record in self.browse(self.ids):
             config_parameters.set_param (
                 'odoo_cenit.shipstation.secret', record.secret or ''
             )
 
-    def set_store_id(self):
-        config_parameters = self.env['ir.config_parameter']
         for record in self.browse(self.ids):
             config_parameters.set_param (
                 'odoo_cenit.shipstation.store_id', record.store_id or ''

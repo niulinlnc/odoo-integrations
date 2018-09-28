@@ -21,7 +21,7 @@
 
 import logging
 
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 _logger = logging.getLogger(__name__)
@@ -44,7 +44,7 @@ class CenitIntegrationSettings(models.TransientModel):
     ############################################################################
     # Default Getters
     ############################################################################
-    def get_default_odoohost(self, context):
+    def get_values(self):
         odoohost = self.env['ir.config_parameter'].get_param(
             'odoo_cenit.odoo.odoohost', default=None
         )
@@ -54,7 +54,7 @@ class CenitIntegrationSettings(models.TransientModel):
     ############################################################################
     # Default Setters
     ############################################################################
-    def set_odoohost(self):
+    def set_values(self):
         config_parameters = self.env['ir.config_parameter']
         for record in self.browse(self.ids):
             config_parameters.set_param (
@@ -91,5 +91,3 @@ class CenitIntegrationSettings(models.TransientModel):
 
         installer.pull_shared_collection(data.get('id'), params=params)
         installer.install_common_data(data['data'])
-
-        return rc
